@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="register.php" method="post">
+        <fieldset>
+            <legend>用户登录</legend>
+            <ul>
+                <li>
+                    <label>用户名:</label>
+                    <input type="text" name="username">
+                </li>
+                <li>
+                    <label>手机号:</label>
+                    <input type="text" name="phonenumber" onkeyup="checkphone()">
+                </li>
+                <li>
+                    <label>邮箱:</label>
+                    <input type="email" name="email" id="email" onkeyup="checkemail()">
+                </li>
+                <li>
+                    <label>密 码:</label>
+                    <input type="password" name="password" id="password">
+                </li>
+                <li>
+                    <label>确认密码:</label>
+                    <input type="password" name="rpassword" id="rpassword" onkeyup="checkpassword()">
+                    <span id="tishi"></span>
+                </li>
+                <li>
+                    <label> </label>
+                    <input type="submit" name="reg" value="注册" id="submit">
+                </li>
+            </ul>
+        </fieldset>
+    </form>
+    <script type="text/javascript">
+        function checkpassword() {
+            var password = document.getElementById("password").value;
+            var repassword = document.getElementById("rpassword").value;
+
+            if (password == repassword) {
+                document.getElementById("tishi").innerHTML = "<font color='green'>两次密码输入一致</font>";
+                document.getElementById("submit").disabled = false;
+                document.getElementById("rpassword").style.borderBlockColor = "green";
+            } else {
+                document.getElementById("tishi").innerHTML = "<font color='red'>两次输入密码不一致!</font>";
+                document.getElementById("submit").disabled = true;
+                document.getElementById("rpassword").style.borderBlockColor = "red";
+            }
+        }
+
+        function checkemail() {
+            var email = document.getElementById("email").value;
+            var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (reg.test(email)) {
+                document.getElementById("email").style.borderBlockColor = "green";
+            } else {
+                document.getElementById("email").style.borderBlockColor = "red";
+                document.getElementById("submit").disabled = false;
+            }
+        }
+
+        function checkphone(){
+            var phone = document.getElementById("phonenumber").value;
+            var reg = /^1[34578]\d{9}$/;
+            if (reg.test(phone)) {
+                document.getElementById("phonenumber").style.borderBlockColor = "green";
+            } else {
+                document.getElementById("phonenumber").style.borderBlockColor = "red";
+                document.getElementById("submit").disabled = false;
+            }
+
+        }
+    </script>
+</body>
+
+</html>
